@@ -1,63 +1,98 @@
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-20" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-      }}></div>
+      {/* Animated Background Grid */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M0 0h100v100H0z'/%3E%3Cpath d='M20 0v100M40 0v100M60 0v100M80 0v100M0 20h100M0 40h100M0 60h100M0 80h100'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '100px 100px'
+        }}></div>
+      </div>
+
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-accent rounded-full opacity-30 animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          ></div>
+        ))}
+      </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Logo */}
-          <div className="mb-8 flex justify-center">
-            <img 
-              src={logo} 
-              alt="Z&C TECH Logo" 
-              className="h-20 w-auto float-animation"
-            />
+        <div className="text-center max-w-5xl mx-auto">
+          {/* Main Heading with Futuristic Design */}
+          <div className="mb-8">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-4 leading-tight font-heading animate-fade-in">
+              <span className="block text-shadow mb-2">TRANSFORMANDO</span>
+              <span className="block text-shadow relative">
+                IDEIAS EM 
+                <span className="relative ml-4">
+                  <span className="text-accent glow-text">CÓDIGO</span>
+                  <div className="absolute -inset-2 bg-accent/20 blur-xl rounded-lg"></div>
+                </span>
+              </span>
+            </h1>
+            
+            {/* Subtitle with neon effect */}
+            <div className="relative inline-block mt-8">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-light text-accent uppercase tracking-wider animate-slide-up">
+                ❮ SOLUÇÕES DIGITAIS PERSONALIZADAS /❯
+              </h2>
+              <div className="absolute inset-0 bg-accent/10 blur-2xl rounded-lg"></div>
+            </div>
           </div>
 
-          {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight font-heading animate-fade-in">
-            <span className="block text-shadow">Transformando Ideias</span>
-            <span className="block text-shadow">em Código.</span>
-            <span className="block text-accent text-4xl md:text-5xl lg:text-6xl mt-4">
-              Criando Soluções Digitais Personalizadas.
-            </span>
-          </h1>
+          {/* Company Introduction */}
+          <div className="mb-12 animate-slide-up">
+            <p className="text-lg md:text-xl text-primary-foreground/80 mb-4 font-light tracking-wide">
+              Seja bem-vindo(a) à
+            </p>
+            <div className="relative inline-block">
+              <span className="text-4xl md:text-5xl font-bold text-accent tracking-wider">Z&C TECH</span>
+              <div className="absolute -inset-2 bg-accent/20 blur-lg rounded-lg"></div>
+            </div>
+            <p className="text-lg md:text-xl text-primary-foreground/80 mt-4 font-light tracking-wide">
+              Sua parceira em inovação tecnológica
+            </p>
+          </div>
 
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-12 max-w-3xl mx-auto animate-slide-up font-light">
-            Seja bem-vindo(a) à <span className="font-semibold text-accent">Z&C TECH</span>. 
-            Sua parceira em inovação tecnológica.
-          </p>
-
-          {/* Call to Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-scale-in">
+          {/* Modern CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-scale-in">
             <Button 
               size="lg" 
-              className="bg-accent hover:bg-accent-glow text-accent-foreground px-8 py-4 text-lg font-semibold rounded-xl shadow-brand-medium hover:shadow-brand-glow transition-all duration-300 hover:scale-105"
+              className="group relative bg-accent hover:bg-accent-glow text-accent-foreground px-10 py-5 text-lg font-semibold rounded-none border-2 border-accent hover:border-accent-glow transition-all duration-300 hover:scale-105 overflow-hidden"
             >
-              Ver Nossos Projetos
+              <span className="relative z-10">❮ VER PROJETOS /❯</span>
+              <div className="absolute inset-0 bg-accent-glow opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
             <Button 
               variant="outline" 
               size="lg"
-              className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105"
+              className="group relative border-2 border-accent text-accent hover:bg-accent hover:text-background px-10 py-5 text-lg font-semibold rounded-none transition-all duration-300 hover:scale-105 overflow-hidden"
             >
-              Fale Conosco
+              <span className="relative z-10">❮ FALE CONOSCO /❯</span>
+              <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Modern Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary-foreground/50 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-accent rounded-full mt-2 animate-pulse"></div>
+        <div className="relative">
+          <div className="w-8 h-12 border-2 border-accent rounded-full flex justify-center bg-accent/10">
+            <div className="w-1 h-4 bg-accent rounded-full mt-3 animate-pulse shadow-brand-glow"></div>
+          </div>
+          <div className="absolute -inset-2 bg-accent/20 blur-md rounded-full"></div>
         </div>
       </div>
     </section>
