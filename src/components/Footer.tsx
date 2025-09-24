@@ -106,7 +106,7 @@ const Footer = () => {
               <div>
                 <p className="text-sm text-primary-foreground/60">Instagram</p>
                 <a 
-                  href="https://instagram.com/zeccompanny"
+                  href="https://www.instagram.com/zeccompany"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary-foreground/80 hover:text-accent transition-colors duration-300"
