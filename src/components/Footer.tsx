@@ -125,7 +125,7 @@ const Footer = () => {
               © 2025 Z&C TECH. Todos os direitos reservados.
             </p>
             <p className="text-primary-foreground/60 text-sm">
-              Desenvolvido com ❤️ pela equipe Z&C TECH
+              Desenvolvido pela equipe Z&C TECH
             </p>
           </div>
         </div>

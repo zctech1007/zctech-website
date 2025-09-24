@@ -77,7 +77,7 @@ const Contact = () => {
                     <div>
                       <p className="text-sm text-muted-foreground">Instagram</p>
                       <a 
-                        href="https://instagram.com/zeccompanny" 
+                        href="https://www.instagram.com/zeccompany" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-primary font-semibold hover:text-primary-light transition-colors"
@@ -95,7 +95,7 @@ const Contact = () => {
                     <div>
                       <p className="text-sm text-muted-foreground">LinkedIn</p>
                       <a 
-                        href="https://www.linkedin.com/company/z-c-tech/?viewAsMember=true" 
+                        href="https://www.linkedin.com/company/z-c-tech/?viewAsMember=truee" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-primary font-semibold hover:text-primary-light transition-colors"

@@ -64,19 +64,13 @@ const About = () => {
                   className="w-full h-[500px] object-cover rounded-2xl"
                 />
               </div>
-              
-              {/* Floating Stats */}
-              <div className="absolute -bottom-6 -left-6 bg-accent text-accent-foreground p-6 rounded-2xl shadow-brand-medium">
-                <div className="text-center">
-                  <div className="text-3xl font-bold">50+</div>
-                  <div className="text-sm font-medium">Projetos Entregues</div>
-                </div>
-              </div>
+          
               
               <div className="absolute -top-6 -right-6 bg-primary text-primary-foreground p-6 rounded-2xl shadow-brand-medium">
                 <div className="text-center">
-                  <div className="text-3xl font-bold">5+</div>
-                  <div className="text-sm font-medium">Anos de Experiência</div>
+                  <div className="text-3xl font-bold">+1
+                  </div>
+                  <div className="text-sm font-medium">Ano de Experiência</div>
                 </div>
               </div>
             </div>
