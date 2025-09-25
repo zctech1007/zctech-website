@@ -13,14 +13,39 @@ const Contact = () => {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    toast({
-      title: "Mensagem Enviada!",
-      description: "Entraremos em contato em breve. Obrigado pelo interesse!",
-    });
-    setFormData({ name: "", email: "", message: "" });
+
+    try {
+      const response = await fetch('http://localhost:3001/send-email', { // Altere para o endereço do seu backend
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Mensagem Enviada!",
+          description: "Entraremos em contato em breve. Obrigado pelo interesse!",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        toast({
+          title: "Ocorreu um erro.",
+          description: "Não foi possível enviar sua mensagem. Tente novamente mais tarde.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao enviar o formulário:", error);
+      toast({
+        title: "Ocorreu um erro.",
+        description: "Não foi possível enviar sua mensagem. Tente novamente mais tarde.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -50,7 +75,7 @@ const Contact = () => {
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold text-primary mb-6 font-heading">
                   Informações de Contato
-                </h3>
+                </h3>               
                 
                 <div className="space-y-6">
                   {/* Email */}
