@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  
   "scripts": {
-    "start:prod": "cd backend && npm install && npm start",
+    "start": "cd backend && npm start",
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
