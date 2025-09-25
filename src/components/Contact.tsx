@@ -75,7 +75,7 @@ const Contact = () => {
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold text-primary mb-6 font-heading">
                   Informações de Contato
-                </h3>                npx ts-node --loader ts-node/esm send-email.ts
+                </h3>               
                 
                 <div className="space-y-6">
                   {/* Email */}
