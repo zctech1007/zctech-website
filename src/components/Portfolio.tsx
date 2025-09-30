@@ -129,7 +129,12 @@ const Portfolio = () => {
           <p className="text-lg text-muted-foreground mb-6">
             Quer ver mais projetos ou discutir seu próximo projeto?
           </p>
-          <button className="bg-primary hover:bg-primary-light text-primary-foreground px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-brand-medium hover:shadow-brand-strong">
+          <button
+            onClick={() => {
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="bg-primary hover:bg-primary-light text-primary-foreground px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-brand-medium hover:shadow-brand-strong"
+          >
             Entre em Contato
           </button>
         </div>

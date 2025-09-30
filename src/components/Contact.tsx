@@ -1,59 +1,12 @@
-import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Instagram, Linkedin, Mail, Send, MapPin, Phone } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { Instagram, Linkedin, Mail, Send } from "lucide-react";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch('http://localhost:3001/send-email', { // Altere para o endereço do seu backend
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        toast({
-          title: "Mensagem Enviada!",
-          description: "Entraremos em contato em breve. Obrigado pelo interesse!",
-        });
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        toast({
-          title: "Ocorreu um erro.",
-          description: "Não foi possível enviar sua mensagem. Tente novamente mais tarde.",
-          variant: "destructive"
-        });
-      }
-    } catch (error) {
-      console.error("Erro ao enviar o formulário:", error);
-      toast({
-        title: "Ocorreu um erro.",
-        description: "Não foi possível enviar sua mensagem. Tente novamente mais tarde.",
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const [state, handleSubmit] = useForm("xyznwebr"); 
 
   return (
     <section id="contact" className="py-20 bg-gradient-subtle">
@@ -166,63 +119,65 @@ const Contact = () => {
                 Envie sua Mensagem
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Nome
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border-2 focus:border-accent focus:ring-accent"
-                    placeholder="Seu nome completo"
-                  />
-                </div>
+              {state.succeeded ? (
+                <p className="text-green-600 font-semibold">Mensagem enviada! Entraremos em contato em breve.</p>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                      Nome
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      className="w-full rounded-xl border-2 focus:border-accent focus:ring-accent"
+                      placeholder="Seu nome completo"
+                    />
+                    <ValidationError prefix="Nome" field="name" errors={state.errors} />
+                  </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    E-mail
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border-2 focus:border-accent focus:ring-accent"
-                    placeholder="seu@email.com"
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      E-mail
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      className="w-full rounded-xl border-2 focus:border-accent focus:ring-accent"
+                      placeholder="seu@email.com"
+                    />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} />
+                  </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                    Mensagem
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    required
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border-2 focus:border-accent focus:ring-accent resize-none"
-                    placeholder="Conte-nos sobre seu projeto e como podemos ajudar..."
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                      Mensagem
+                    </label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      rows={5}
+                      required
+                      className="w-full rounded-xl border-2 focus:border-accent focus:ring-accent resize-none"
+                      placeholder="Conte-nos sobre seu projeto e como podemos ajudar..."
+                    />
+                    <ValidationError prefix="Mensagem" field="message" errors={state.errors} />
+                  </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-accent hover:bg-accent-glow text-accent-foreground py-6 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-brand-medium hover:shadow-brand-glow"
-                >
-                  <Send className="h-5 w-5 mr-2" />
-                  Enviar Mensagem
-                </Button>
-              </form>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-accent hover:bg-accent-glow text-accent-foreground py-6 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-brand-medium hover:shadow-brand-glow"
+                    disabled={state.submitting}
+                  >
+                    <Send className="h-5 w-5 mr-2" />
+                    Enviar Mensagem
+                  </Button>
+                </form>
+              )}
             </CardContent>
           </Card>
         </div>

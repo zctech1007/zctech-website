@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/zctech-website/", 
+  base: mode === "development" ? "/" : "/zctech-website/", // <-- ajuste aqui
   server: {
     host: "::",
     port: 8080,
@@ -16,4 +16,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    'process.env': {}
+  }
 }));

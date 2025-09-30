@@ -66,6 +66,7 @@ const Hero = () => {
           </div>
 
           {/* Modern CTA Buttons */}
+          {/*
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-scale-in">
             <Button 
               size="lg" 
@@ -83,6 +84,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
           </div>
+          */}
         </div>
       </div>
 
