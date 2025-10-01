@@ -1,22 +1,20 @@
 name: Deploy React App to GitHub Pages
 
-
 on:
-  
+  # O deploy será executado sempre que houver um push para a branch "main"
   push:
     branches: [ "main" ]
   
+  # Permite a execução manual do workflow
   workflow_dispatch:
-
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-
 jobs:
- 
+  
   deploy:
     environment:
       name: github-pages
@@ -27,34 +25,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      
+      # Define a versão do Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20 
       
+      # Instala as dependências (certifique-se de que a raiz do projeto é onde está o package.json)
       - name: Install dependencies
         run: npm install
 
-      
+      # Executa o script de build do Vite (cria a pasta 'dist' por padrão)
       - name: Build
         run: npm run build
 
-      
+      # Copia index.html para 404.html (necessário para SPA no GitHub Pages)
       - name: Copy index.html to 404.html
         run: cp ./dist/index.html ./dist/404.html
 
-     
+      # Configura o ambiente GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      
+      # *** CORREÇÃO AQUI: APONTANDO DIRETAMENTE PARA A PASTA DE BUILD 'dist' ***
+      # Esta etapa falhava porque procurava por 'dist/zctech-website'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist/zctech-website'
+          # O caminho deve ser apenas './dist' ou 'dist', que é o output do 'vite build'
+          path: './dist' 
 
-      
+      # Finalmente, faz o deploy do artefato
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
